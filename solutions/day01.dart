@@ -18,9 +18,8 @@ class Day01 extends GenericDay {
   /// on a day-to-day basis what this function should return.
   @override
   List<int> parseInput() {
-    final lines = input.getPerLine();
     // exemplary usage of ParseUtil class
-    return ParseUtil.stringListToIntList(lines);
+    return [];
   }
 
   /// The `solvePartX` methods always return a int, the puzzle solution. This
