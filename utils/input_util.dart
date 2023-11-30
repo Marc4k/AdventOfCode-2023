@@ -1,7 +1,5 @@
 import 'dart:io';
 
-/// Automatically reads reads the contents of the input file for given [day]. \
-/// Note that file name and location must align.
 class InputUtil {
   InputUtil(int day)
       : _inputAsString = _readInputDay(day),
