@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 
-/// Small Program to be used to generate files and boilerplate for a given day.\
-/// Call with `dart run day_generator.dart <day>`
 void main(List<String?> args) async {
   const year = '2023';
   const session = '<your session cookie here>';
