@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, use_string_buffers
+import 'package:collection/collection.dart';
+
 import '../utils/index.dart';
 
 class Day01 extends GenericDay {
@@ -11,29 +13,12 @@ class Day01 extends GenericDay {
 
   @override
   int solvePart1() {
-    var sum = 0;
-    for (var i = 0; i < parseInput().length; i++) {
-      final onlyNumber = parseInput()[i].replaceAll(RegExp(r'\D'), '');
-
-      final number = onlyNumber[0] + onlyNumber[onlyNumber.length - 1];
-
-      sum += int.parse(number);
-    }
-
-    return sum;
+    return parseInput()
+        .removeCharacters()
+        .getFirstAndLastDigit()
+        .map(int.parse)
+        .sum;
   }
-
-  List<DigitNumberModel> digits = [
-    DigitNumberModel(digit: 'one', number: '1'),
-    DigitNumberModel(digit: 'two', number: '2'),
-    DigitNumberModel(digit: 'three', number: '3'),
-    DigitNumberModel(digit: 'four', number: '4'),
-    DigitNumberModel(digit: 'five', number: '5'),
-    DigitNumberModel(digit: 'six', number: '6'),
-    DigitNumberModel(digit: 'seven', number: '7'),
-    DigitNumberModel(digit: 'eight', number: '8'),
-    DigitNumberModel(digit: 'nine', number: '9'),
-  ];
 
   @override
   int solvePart2() {
@@ -80,6 +65,26 @@ class Day01 extends GenericDay {
     return sum;
   }
 }
+
+extension MyListExtension on List<String> {
+  List<String> removeCharacters() =>
+      map((e) => e.replaceAll(RegExp(r'\D'), '')).toList();
+
+  List<String> getFirstAndLastDigit() =>
+      map((e) => e[0] + e[e.length - 1]).toList();
+}
+
+List<DigitNumberModel> digits = [
+  DigitNumberModel(digit: 'one', number: '1'),
+  DigitNumberModel(digit: 'two', number: '2'),
+  DigitNumberModel(digit: 'three', number: '3'),
+  DigitNumberModel(digit: 'four', number: '4'),
+  DigitNumberModel(digit: 'five', number: '5'),
+  DigitNumberModel(digit: 'six', number: '6'),
+  DigitNumberModel(digit: 'seven', number: '7'),
+  DigitNumberModel(digit: 'eight', number: '8'),
+  DigitNumberModel(digit: 'nine', number: '9'),
+];
 
 class DigitNumberModel {
   String digit;

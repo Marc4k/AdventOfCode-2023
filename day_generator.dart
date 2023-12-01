@@ -3,7 +3,8 @@ import 'dart:io';
 
 void main(List<String?> args) async {
   const year = '2023';
-  const session = '<your session cookie here>';
+  const session =
+      '53616c7465645f5f5ba268355c6fe59e69b65bc9df5d4781ea0ef5a5fc715ddd865752e0f46712c99ae31eb5ac73af9a967d6f9714a1d620e028d0f37aa8b1c3';
 
   if (args.length > 1) {
     print('Please call with: <dayNumber>');
