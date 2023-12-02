@@ -5,6 +5,7 @@ import 'utils/generic_day.dart';
 
 final days = <GenericDay>[
   Day01(),
+  Day02(),
 ];
 
 void main(List<String?> args) {
