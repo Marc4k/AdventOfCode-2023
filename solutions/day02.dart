@@ -42,14 +42,12 @@ class Day02 extends GenericDay {
 
   @override
   int solvePart1() {
-    const idSum = 0;
-    return parseInput().map((e) => e.calculatePart1(idSum)).sum;
+    return parseInput().map((e) => e.calculatePart1()).sum;
   }
 
   @override
   int solvePart2() {
-    const idSum = 0;
-    return parseInput().map((e) => e.calculatePart2(idSum)).sum;
+    return parseInput().map((e) => e.calculatePart2()).sum;
   }
 }
 
@@ -98,6 +96,7 @@ List<GameData> getGameData({
       ..removeWhere((element) => element.isEmpty);
     final greenString = greenList[i].split(',').removeCharacters()
       ..removeWhere((element) => element.isEmpty);
+
     data.add(
       GameData(
         gameID: int.parse(gameList[i]),
@@ -124,14 +123,8 @@ class GameData {
   final int maxRed;
   final int maxGreen;
 
-  int calculatePart1(int currentSum) {
-    if (maxRed < 13 && maxGreen < 14 && maxBlue < 15) {
-      currentSum += gameID;
-    }
-    return currentSum;
-  }
+  int calculatePart1() =>
+      (maxRed < 13 && maxGreen < 14 && maxBlue < 15) ? gameID : 0;
 
-  int calculatePart2(int currentSum) {
-    return currentSum += maxRed * maxGreen * maxBlue;
-  }
+  int calculatePart2() => maxRed * maxGreen * maxBlue;
 }
