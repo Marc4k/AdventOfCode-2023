@@ -12,31 +12,13 @@ class Day02 extends GenericDay {
 
   @override
   List<GameData> parseInput() {
-    final exampleInput = input.getPerLine();
-
-    final gameIds =
-        exampleInput.removeWhiteSpace().removeGame().map(_getGameID).toList();
-
-    final blueValues = exampleInput
-        .removeWhiteSpace()
-        .map((e) => _getValue(e, 'blue'))
-        .toList();
-
-    final redValues = exampleInput
-        .removeWhiteSpace()
-        .map((e) => _getValue(e, 'red'))
-        .toList();
-
-    final greenValues = exampleInput
-        .removeWhiteSpace()
-        .map((e) => _getValue(e, 'green'))
-        .toList();
+    final line = input.getPerLine();
 
     return getGameData(
-      gameList: gameIds,
-      blueList: blueValues,
-      greenList: greenValues,
-      redList: redValues,
+      game: line.removeWhiteSpace().removeGame().map(_getGameID).toList(),
+      blue: line.removeWhiteSpace().getGameValue('blue').toList(),
+      green: line.removeWhiteSpace().getGameValue('green').toList(),
+      red: line.removeWhiteSpace().getGameValue('red').toList(),
     );
   }
 
@@ -51,9 +33,11 @@ class Day02 extends GenericDay {
   }
 }
 
-extension MyListExtensionDay2 on Iterable<String> {
+extension on Iterable<String> {
   Iterable<String> removeWhiteSpace() => map((e) => e.replaceAll(' ', ''));
   Iterable<String> removeGame() => map((e) => e.replaceAll('Game', ''));
+  Iterable<String> getGameValue(String value) =>
+      map((e) => _getValue(e, value));
 }
 
 String _getGameID(String s) {
@@ -82,24 +66,25 @@ String _getValue(String s, String value) {
 }
 
 List<GameData> getGameData({
-  required List<String> gameList,
-  required List<String> blueList,
-  required List<String> greenList,
-  required List<String> redList,
+  required List<String> game,
+  required List<String> blue,
+  required List<String> green,
+  required List<String> red,
 }) {
   final data = <GameData>[];
-  for (var i = 0; i < gameList.length; i++) {
-    final blueString = blueList[i].split(',').removeCharacters()
+
+  for (var i = 0; i < game.length; i++) {
+    final blueString = blue[i].split(',').removeCharacters()
       ..removeWhere((element) => element.isEmpty);
 
-    final redString = redList[i].split(',').removeCharacters()
+    final redString = red[i].split(',').removeCharacters()
       ..removeWhere((element) => element.isEmpty);
-    final greenString = greenList[i].split(',').removeCharacters()
+    final greenString = green[i].split(',').removeCharacters()
       ..removeWhere((element) => element.isEmpty);
 
     data.add(
       GameData(
-        gameID: int.parse(gameList[i]),
+        gameID: int.parse(game[i]),
         maxBlue: blueString.map(int.parse).reduce(max),
         maxRed: redString.map(int.parse).reduce(max),
         maxGreen: greenString.map(int.parse).reduce(max),
